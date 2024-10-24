@@ -21,14 +21,17 @@ def Dummy_Sensor():
     return random.randint(0, 100)
     #return random.randint(0, 100), random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)
 
+state = "直立"
+
 def Dummy_Control(data):
     # print(data[0])
     # Training Dataset: save to a file (.csv)
     print("----------")
-    print("Length: ")
-    print(len(data))
-    for v in data:
-        print(v)
-
-
-
+    global state
+    if data[0][1] <= -7:
+        state = "直立"
+    elif data[0][0] >= 7 or data[0][0] <= -7:
+        state = "橫擺"
+    elif data[0][2] >= 9 or data[0][2] <= -9:
+        state = "平躺"
+    print(state)
