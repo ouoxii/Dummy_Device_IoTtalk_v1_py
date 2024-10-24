@@ -8,41 +8,27 @@ MQTT_User = 'iottalk'
 MQTT_PW = 'iottalk2023'
 
 device_model = 'Dummy_Device'
-IDF_list = ['Dummy_Sensor']
+IDF_list = []
 ODF_list = ['Dummy_Control']
 device_id = None #if None, device_id = MAC address
 device_name = None
 exec_interval = 1  # IDF/ODF interval
 
-# 設定兩個全域變數用來追蹤遞增和遞減的數值
-increasing = True  # 用來控制是遞增還是遞減
-value = 0  # 初始值
+def on_register(r):
+    print('Server: {}\nDevice name: {}\nRegister successfully.'.format(r['server'], r['d_name']))
 
 def Dummy_Sensor():
-    global value, increasing
+    return random.randint(0, 100)
+    #return random.randint(0, 100), random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)
 
-    if increasing:
-        value += 10
-        if value >= 100:  # 當達到 100 時開始遞減
-            increasing = False
-    else:
-        value -= 10
-        if value <= 0:  # 當降到 0 時開始遞增
-            increasing = True
+def Dummy_Control(data):
+    # print(data[0])
+    # Training Dataset: save to a file (.csv)
+    print("----------")
+    print("Length: ")
+    print(len(data))
+    for v in data:
+        print(v)
 
-    return value, value
-
-def Dummy_Control(data:list):
-    print(data[0])
-
-def on_register(r):
-    print(f'Device name: {r["d_name"]}')
-    '''
-    #You can write some SA routine code here, for example:
-    import time, DAI
-    while True:
-        DAI.push('Dummy_Sensor', [100, 200])
-        time.sleep(exec_interval)
-    '''
 
 
