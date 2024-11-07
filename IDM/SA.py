@@ -7,15 +7,17 @@ MQTT_encryption = True
 MQTT_User = 'iottalk'
 MQTT_PW = 'iottalk2023'
 
-device_model = 'MYwahaha'
-IDF_list = []
-ODF_list = ['usagi_wahaha'] #原本的['Dummy_Control']不是自訂的
-device_id =  None #"AABBCCDD" if None, device_id = MAC address
-device_name = "wahaha1107"
+device_model = 'usagi_idm'
+IDF_list = ['usagi_idf']
+ODF_list = [] #原本的['Dummy_Control']不是自訂的
+device_id =  "usagi" #if None, device_id = MAC address
+device_name = "wahaha_idm"
 exec_interval = 1  # IDF/ODF interval
 
-def usagi_wahaha(data:list):
-    print(data)
+def usagi_idf():
+    num = random.randint(0, 20)
+    print('usagi_idf:', num)
+    return num
 
 def on_register(r):
     print('Server: {}\nDevice name: {}\nRegister successfully.'.format(r['server'], r['d_name']))
