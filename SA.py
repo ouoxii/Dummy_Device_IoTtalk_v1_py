@@ -7,14 +7,14 @@ MQTT_encryption = True
 MQTT_User = 'iottalk'
 MQTT_PW = 'iottalk2023'
 
-device_model = 'ntou_acc_dm'
+device_model = 'MYwahaha'
 IDF_list = []
-ODF_list = ['ntou_acc']
-device_id = "AABBCCDD" #if None, device_id = MAC address
-device_name = "ntou1031"
+ODF_list = ['usagi_wahaha'] #原本的['Dummy_Control']不是自訂的
+device_id =  None #"AABBCCDD" if None, device_id = MAC address
+device_name = "wahaha1107"
 exec_interval = 1  # IDF/ODF interval
 
-def ntou_acc(data:list):
+def usagi_wahaha(data:list):
     print(data)
 
 def on_register(r):
