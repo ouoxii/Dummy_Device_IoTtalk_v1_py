@@ -66,7 +66,7 @@ def Dummy_Control(data:list):
         case 0:
             print("畫圈\n")
         case 1:
-            print("畫線\n")
+            print("舉起\n")
             light=100
         case 2:
             print("未偵測到動作\n")
