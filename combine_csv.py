@@ -5,7 +5,7 @@ import json
 
 # 'line.csv' 這個手勢怪怪的
 
-files = [ 'circle2.csv', 'lift.csv','other.csv']
+files = [ 'circle2.csv', 'lift.csv','other2.csv']
 
 x = []
 y = []
