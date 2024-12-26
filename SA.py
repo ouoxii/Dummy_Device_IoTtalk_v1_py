@@ -1,5 +1,6 @@
 import random
-
+import numpy as np
+import openpyxl
 ServerURL = 'https://class.iottalk.tw' #For example: 'https://DomainName'
 MQTT_broker = 'iot.iottalk.tw' # MQTT Broker address, for example: 'DomainName' or None = no MQTT support
 MQTT_port = 8883
@@ -21,17 +22,38 @@ def Dummy_Sensor():
     return random.randint(0, 100)
     #return random.randint(0, 100), random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)
 
-state = "直立"
 
+from openpyxl import Workbook
+
+wb = Workbook()
+ws = wb.active
+state = "直立"
+import time
+l = list()
+res = list()
+t = time.time()
+save_flag = False
 def Dummy_Control(data):
-    # print(data[0])
-    # Training Dataset: save to a file (.csv)
-    print("----------")
-    global state
-    if data[0][1] <= -7:
-        state = "直立"
-    elif data[0][0] >= 7 or data[0][0] <= -7:
-        state = "橫擺"
-    elif data[0][2] >= 9 or data[0][2] <= -9:
-        state = "平躺"
-    print(state)
+    global l, res, t, save_flag  # 明確宣告使用全域變數
+
+    print(len(res))
+    if 2.5 <= time.time() - t <= 3:
+        print('start gesture')
+    if time.time() - t > 3:
+        data = data[0]
+        l.append(data)
+        if len(l) == 10:
+            res.extend(l)
+            l = list()
+            t = time.time()  # 重新更新全域變數 t
+            print('end gesture')
+    if len(res) >= 1500 and not save_flag:  # 加入條件判斷以避免多次儲存
+        # 將結果寫入 Excel
+        for row in res:
+            ws.append(row)
+        wb.save("circle.xlsx")
+        print("save end close")
+        save_flag = True  # 設定旗標為 True，表示已完成儲存
+
+
+
