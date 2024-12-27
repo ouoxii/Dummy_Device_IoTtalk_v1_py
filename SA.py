@@ -65,12 +65,13 @@ def Dummy_Control(data:list):
     match now_action:
         case 0:
             print("畫圈\n")
+            light=0
         case 1:
             print("舉起\n")
             light=100
         case 2:
             print("未偵測到動作\n")
-            light=0
+            light=50
 # =============================================================================
 #         case 3:
 #             print("偵測到直線，燈泡亮度調整成中間值\n")
